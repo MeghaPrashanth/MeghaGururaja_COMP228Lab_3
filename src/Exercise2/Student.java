@@ -12,5 +12,19 @@ public abstract class Student {
         this.fulltime_status=fulltime_status;
     }
 
-    public abstract  void tuition();
+    public String getName() {
+        return name;
+    }
+
+    public boolean isFulltime_status() {
+        return fulltime_status;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s%n%s: %s",
+                getName(),"Full Time Student",isFulltime_status());
+    }
+
+    public abstract  double tuition();
 }
