@@ -1,5 +1,7 @@
 package Exercise3;
 
+import javax.swing.*;
+
 public abstract  class Mortgage implements MortgageConstants {
 
    private final String Mortgage_Number;
@@ -12,17 +14,12 @@ public abstract  class Mortgage implements MortgageConstants {
    {
        this.Mortgage_Number = Mortgage_Number;
        this.Customer_Name = Customer_Name;
-       if(Mortage_Amount<=0.0 && Mortage_Amount>300000.00)
+       if(Mortage_Amount<=0.0 && Mortage_Amount>maximum_mortgage_amount)
        {
            throw new IllegalArgumentException("Mortgage Amount must be greater than $0.0 and less than $300,000.00");
        }
        this.Mortgage_Amount = Mortage_Amount;
        this.Interest_Rate = Interest_Rate;
-       if(term <=0 || term>5)
-       {
-           throw new IllegalArgumentException("The term must be greater than 0 and less than or equal to 5 years");
-       }
-
        this.term =term;
 
    }
@@ -46,15 +43,44 @@ public abstract  class Mortgage implements MortgageConstants {
         return term;
     }
 
+    Double Interest_Rate_Cal;
 
-    public  String getMortgageInfo()
+    public double CalculateInterestRate()
     {
-        return String.format("%s%s%n%s%s%n%s%s%n%s%s%n%s%s",
-        "Mortgage Number: ",getMortgage_Number(),
-        "Customer Name: ",getCustomer_Name(),
-        "Mortgage Amount: ",getMortgage_Amount(),
-        "Interest Rate",getInterest_Rate(),
-        "Term: ",getTerm());
+        if(term == short_term)
+            Interest_Rate_Cal = Mortgage_Amount * (Interest_Rate/100) * short_term;
+        else if(term == medium_term)
+            Interest_Rate_Cal = Mortgage_Amount * (Interest_Rate/100) * medium_term;
+        else if(term == long_term)
+            Interest_Rate_Cal = Mortgage_Amount * (Interest_Rate/100) * long_term;
+        else
+            Interest_Rate_Cal = Mortgage_Amount * (Interest_Rate/100) * short_term ;
+
+        return  Interest_Rate_Cal;
 
     }
+
+
+    public double Total_Amount_Owed()
+    {
+       return  Mortgage_Amount + Interest_Rate_Cal;
+    }
+
+    public  void getMortgageInfo() {
+        String message = "<html> Hi Welcome  " + "<br>"
+                + "Bank Name is :" + bank_name + "<br>"
+                + "Mortgage Number :" + getMortgage_Number()
+                + "<br>" +
+                "Customer Name :" + getCustomer_Name()
+                + "<br>" +
+                "Mortgage Amount: $" + getMortgage_Amount()
+                + "<br>" +
+                "Interest Rate : " + CalculateInterestRate()
+                + "<br>" +
+                "Term :" + getTerm() + "years"
+                + "<br>" +
+                "Total Amount Owed : $" + Total_Amount_Owed();
+        JOptionPane.showMessageDialog(null, message);
+    }
+
 }

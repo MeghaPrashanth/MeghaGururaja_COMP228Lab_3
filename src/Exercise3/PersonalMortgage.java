@@ -6,11 +6,4 @@ public class PersonalMortgage extends  Mortgage {
     {
         super(Mortgage_Number,Customer_Name,Mortage_Amount,(Interest_Rate+2),term);
     }
-
-    @Override
-    public  String getMortgageInfo()
-    {
-        return String.format("Business Mortgage: %s",
-                super.toString());
-    }
 }

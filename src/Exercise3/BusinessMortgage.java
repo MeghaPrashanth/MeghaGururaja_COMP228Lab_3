@@ -7,12 +7,4 @@ public class BusinessMortgage extends  Mortgage {
         super(Mortgage_Number,Customer_Name,Mortage_Amount,(Interest_Rate+1),term);
     }
 
-
-
-    @Override
-    public  String getMortgageInfo()
-    {
-        return String.format("Business Mortgage: %s",
-                super.toString());
-    }
 }

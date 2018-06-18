@@ -7,7 +7,7 @@ public interface MortgageConstants {
     int long_term = 5;
 
     String bank_name = "City Toronto Bank";
-    double maximu_mortgage_amount = 300000.00;
+    double maximum_mortgage_amount = 300000.00;
 }
 
 
